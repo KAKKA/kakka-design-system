@@ -1,4 +1,4 @@
-name: Deploy Storybook to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -25,11 +25,18 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm build:tokens
+      - run: pnpm --filter @kakka/react build
+      - run: pnpm --filter @kakka/demo build
       - run: pnpm --filter @kakka/react storybook:build
+      - name: Combine demo and storybook into _site/
+        run: |
+          mkdir -p _site/storybook
+          cp -r packages/demo/dist/. _site/
+          cp -r packages/react/storybook-static/. _site/storybook/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: packages/react/storybook-static
+          path: _site
 
   deploy:
     environment:

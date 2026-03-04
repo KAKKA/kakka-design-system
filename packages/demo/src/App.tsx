@@ -163,7 +163,7 @@ export default function App() {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => window.open('https://kakka.github.io/kakka-design-system/', '_blank')}
+                onClick={() => window.open('https://kakka.github.io/kakka-design-system/storybook/', '_blank')}
               >
                 View Storybook
               </Button>
@@ -410,7 +410,7 @@ export default function App() {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => window.open('https://kakka.github.io/kakka-design-system/', '_blank')}
+                onClick={() => window.open('https://kakka.github.io/kakka-design-system/storybook/', '_blank')}
               >
                 Storybook を開く
               </Button>
@@ -434,7 +434,7 @@ export default function App() {
               <a href="https://github.com/KAKKA/kakka-design-system" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
                 GitHub
               </a>
-              <a href="https://kakka.github.io/kakka-design-system/" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
+              <a href="https://kakka.github.io/kakka-design-system/storybook/" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
                 Storybook
               </a>
             </div>
