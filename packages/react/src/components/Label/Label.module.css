@@ -1,0 +1,27 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--kakka-font-family-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--kakka-color-gray-700, #333);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  cursor: default;
+}
+
+.required {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--kakka-color-gray-0, #fff);
+  background: var(--kakka-color-gray-800, #222);
+  border-radius: 2px;
+  line-height: 1.5;
+  white-space: nowrap;
+}

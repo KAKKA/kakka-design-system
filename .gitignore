@@ -1,0 +1,14 @@
+node_modules/
+dist/
+storybook-static/
+.turbo/
+*.local
+.DS_Store
+.env
+.gradle/
+*.iml
+local.properties
+build/
+.build/
+*.xcworkspace
+*.xcodeproj

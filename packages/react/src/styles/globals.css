@@ -1,0 +1,18 @@
+@import '@kakka/tokens/css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-md, 16px);
+  line-height: var(--kakka-font-lineHeight-normal, 1.6);
+  color: var(--kakka-color-semantic-text-primary);
+  background-color: var(--kakka-color-semantic-background-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

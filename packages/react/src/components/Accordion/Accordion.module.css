@@ -1,0 +1,77 @@
+.accordion {
+  width: 100%;
+  border: 1px solid var(--kakka-color-gray-200, #e0e0e0);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: var(--kakka-font-family-sans);
+}
+
+.item {
+  border-bottom: 1px solid var(--kakka-color-gray-200, #e0e0e0);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.heading {
+  margin: 0;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--kakka-color-gray-900, #111);
+  letter-spacing: 0.01em;
+  transition: background 0.15s ease;
+  gap: 12px;
+}
+
+.trigger:hover {
+  background: var(--kakka-color-gray-50, #f9f9f9);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000);
+  outline-offset: -2px;
+}
+
+.triggerLabel {
+  flex: 1;
+}
+
+.icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  color: var(--kakka-color-gray-500, #888);
+  transition: transform 0.2s ease;
+}
+
+.item[data-open='true'] .icon {
+  transform: rotate(180deg);
+}
+
+/* コンテンツのアニメーション */
+.contentWrapper {
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+  max-height: 0;
+}
+
+.content {
+  padding: 0 20px 16px;
+  font-size: 14px;
+  color: var(--kakka-color-gray-600, #555);
+  line-height: 1.7;
+}

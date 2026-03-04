@@ -1,0 +1,81 @@
+.wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.fullWidth .input {
+  width: 100%;
+}
+
+.label {
+  font-family: var(--kakka-font-family-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--kakka-color-gray-700, #333);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.input {
+  display: block;
+  padding: 10px 12px;
+  font-family: var(--kakka-font-family-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--kakka-color-gray-900, #111);
+  background: var(--kakka-color-gray-0, #fff);
+  border: 1.5px solid var(--kakka-color-gray-300, #ccc);
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  min-width: 0;
+}
+
+.input::placeholder {
+  color: var(--kakka-color-gray-400, #aaa);
+}
+
+.input:hover:not(:disabled) {
+  border-color: var(--kakka-color-gray-500, #888);
+}
+
+.input:focus {
+  border-color: var(--kakka-color-gray-900, #111);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.input:disabled {
+  background: var(--kakka-color-gray-50, #f9f9f9);
+  color: var(--kakka-color-gray-400, #aaa);
+  cursor: not-allowed;
+  border-color: var(--kakka-color-gray-200, #e5e5e5);
+}
+
+/* error state */
+.inputError {
+  border-color: var(--kakka-color-semantic-border-error, #cc0000);
+}
+
+.inputError:focus {
+  border-color: var(--kakka-color-semantic-border-error, #cc0000);
+  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+}
+
+.error {
+  font-family: var(--kakka-font-family-sans);
+  font-size: 12px;
+  color: var(--kakka-color-semantic-text-error, #cc0000);
+  line-height: 1.4;
+}
+
+.hint {
+  font-family: var(--kakka-font-family-sans);
+  font-size: 12px;
+  color: var(--kakka-color-gray-500, #888);
+  line-height: 1.4;
+}

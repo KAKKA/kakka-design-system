@@ -1,0 +1,23 @@
+{
+  "name": "kakka-design-system",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "build:tokens": "turbo build --filter=@kakka/tokens",
+    "build:react": "turbo build --filter=@kakka/react",
+    "storybook": "turbo storybook --filter=@kakka/react",
+    "storybook:build": "turbo storybook:build --filter=@kakka/react",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "clean": "turbo clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

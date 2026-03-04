@@ -1,0 +1,11 @@
+{
+  "borderRadius": {
+    "none": { "value": "0",    "$type": "dimension" },
+    "sm":   { "value": "2",    "$type": "dimension" },
+    "md":   { "value": "4",    "$type": "dimension" },
+    "lg":   { "value": "8",    "$type": "dimension", "$description": "KAKKAのメインR値" },
+    "xl":   { "value": "12",   "$type": "dimension" },
+    "2xl":  { "value": "16",   "$type": "dimension" },
+    "full": { "value": "9999", "$type": "dimension", "$description": "Pill/Chip形状" }
+  }
+}

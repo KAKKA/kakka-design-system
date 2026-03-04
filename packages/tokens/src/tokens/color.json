@@ -1,0 +1,53 @@
+{
+  "color": {
+    "gray": {
+      "0":   { "value": "#FFFFFF",  "$type": "color", "$description": "Pure White" },
+      "50":  { "value": "#F7F7F5",  "$type": "color", "$description": "温かみのある白" },
+      "100": { "value": "#EFEFEC",  "$type": "color", "$description": "背景・サーフェス" },
+      "200": { "value": "#E0E0DB",  "$type": "color", "$description": "ボーダー・区切り線" },
+      "300": { "value": "#C8C8C1",  "$type": "color", "$description": "無効状態" },
+      "400": { "value": "#A8A89E",  "$type": "color", "$description": "プレースホルダー" },
+      "500": { "value": "#787870",  "$type": "color", "$description": "セカンダリテキスト" },
+      "600": { "value": "#525249",  "$type": "color", "$description": "ボディテキスト" },
+      "700": { "value": "#363630",  "$type": "color", "$description": "プライマリテキスト" },
+      "800": { "value": "#1E1E19",  "$type": "color", "$description": "強調テキスト" },
+      "900": { "value": "#0A0A07",  "$type": "color", "$description": "ほぼ黒（微温かみ）" }
+    },
+    "accent": {
+      "primary": {
+        "light":   { "value": "#E8E4DC", "$type": "color", "$description": "アクセント背景（砂色）" },
+        "default": { "value": "#8B7355", "$type": "color", "$description": "ウォームブラウン（KAKKAオリジナリティ）" },
+        "dark":    { "value": "#5C4A35", "$type": "color", "$description": "アクセントダーク" }
+      },
+      "secondary": {
+        "default": { "value": "#4A6741", "$type": "color", "$description": "ダークオリーブグリーン" }
+      }
+    },
+    "semantic": {
+      "text": {
+        "primary":   { "value": "{color.gray.800}", "$type": "color" },
+        "secondary": { "value": "{color.gray.600}", "$type": "color" },
+        "disabled":  { "value": "{color.gray.400}", "$type": "color" },
+        "inverse":   { "value": "{color.gray.0}",   "$type": "color" },
+        "accent":    { "value": "{color.accent.primary.default}", "$type": "color" }
+      },
+      "background": {
+        "default":  { "value": "{color.gray.0}",   "$type": "color" },
+        "subtle":   { "value": "{color.gray.50}",  "$type": "color" },
+        "muted":    { "value": "{color.gray.100}", "$type": "color" },
+        "inverse":  { "value": "{color.gray.900}", "$type": "color" }
+      },
+      "border": {
+        "default":  { "value": "{color.gray.200}", "$type": "color" },
+        "strong":   { "value": "{color.gray.400}", "$type": "color" },
+        "focus":    { "value": "{color.gray.800}", "$type": "color" }
+      },
+      "status": {
+        "error":   { "value": "#C0392B", "$type": "color" },
+        "warning": { "value": "#B7860B", "$type": "color" },
+        "success": { "value": "#4A6741", "$type": "color" },
+        "info":    { "value": "{color.gray.700}", "$type": "color" }
+      }
+    }
+  }
+}

@@ -1,0 +1,104 @@
+.dialog {
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: var(--kakka-color-gray-0, #ffffff);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.16), 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-width: min(560px, calc(100vw - 32px));
+  width: 100%;
+  max-height: calc(100vh - 64px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(8px) scale(0.97);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* バックドロップ */
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* open 状態 */
+.dialog[data-open='true'] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.dialog[data-open='true']::backdrop {
+  opacity: 1;
+}
+
+/* open の showModal による標準アニメーションを除く */
+.dialog[open] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.dialog[open]::backdrop {
+  opacity: 1;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 0;
+  gap: 12px;
+  min-height: 52px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--kakka-font-family-sans);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--kakka-color-gray-900, #111);
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--kakka-color-gray-500, #888);
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.closeButton:hover {
+  background: var(--kakka-color-gray-100, #f0f0f0);
+  color: var(--kakka-color-gray-900, #111);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000);
+  outline-offset: 2px;
+}
+
+.body {
+  padding: 16px 24px 24px;
+  overflow-y: auto;
+  font-family: var(--kakka-font-family-sans);
+  font-size: 14px;
+  color: var(--kakka-color-gray-700, #333);
+  line-height: 1.6;
+}

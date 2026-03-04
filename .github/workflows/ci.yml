@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  tokens-build:
+    name: Build Tokens
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @kakka/tokens build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tokens-dist
+          path: packages/tokens/dist/
+
+  react-build:
+    name: React Build & Typecheck
+    needs: tokens-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: tokens-dist
+          path: packages/tokens/dist/
+      - run: pnpm --filter @kakka/react typecheck
+      - run: pnpm --filter @kakka/react build
+
+  android-build:
+    name: Android Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x gradlew
+      - run: ./gradlew :kakka-components:assembleRelease
+
+  ios-build:
+    name: iOS Build
+    runs-on: macos-15
+    defaults:
+      run:
+        working-directory: packages/ios
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift build -c release

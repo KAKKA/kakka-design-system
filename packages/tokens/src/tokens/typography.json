@@ -1,0 +1,33 @@
+{
+  "font": {
+    "family": {
+      "sans": { "value": "'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif", "$type": "fontFamily" },
+      "mono": { "value": "'JetBrains Mono', 'Fira Code', 'SF Mono', monospace", "$type": "fontFamily" }
+    },
+    "size": {
+      "xs":  { "value": "12", "$type": "dimension" },
+      "sm":  { "value": "14", "$type": "dimension" },
+      "md":  { "value": "16", "$type": "dimension", "$description": "ベースサイズ" },
+      "lg":  { "value": "18", "$type": "dimension" },
+      "xl":  { "value": "20", "$type": "dimension" },
+      "2xl": { "value": "24", "$type": "dimension" },
+      "3xl": { "value": "30", "$type": "dimension" },
+      "4xl": { "value": "36", "$type": "dimension" }
+    },
+    "weight": {
+      "regular": { "value": "400", "$type": "fontWeight" },
+      "medium":  { "value": "500", "$type": "fontWeight" },
+      "bold":    { "value": "700", "$type": "fontWeight" }
+    },
+    "lineHeight": {
+      "tight":  { "value": "1.25", "$type": "number" },
+      "normal": { "value": "1.6",  "$type": "number", "$description": "日本語の可読性に最適" },
+      "loose":  { "value": "1.875","$type": "number" }
+    },
+    "letterSpacing": {
+      "tight":  { "value": "-0.02em", "$type": "dimension" },
+      "normal": { "value": "0.01em",  "$type": "dimension" },
+      "wide":   { "value": "0.08em",  "$type": "dimension" }
+    }
+  }
+}

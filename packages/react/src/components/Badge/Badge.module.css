@@ -1,0 +1,56 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-family: var(--kakka-font-family-sans);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  line-height: 1;
+  border: 1.5px solid transparent;
+  /* size: md */
+  padding: 3px 10px;
+  font-size: 12px;
+}
+
+/* size: sm */
+.badge[data-size='sm'] {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+/* variant: default */
+.badge[data-variant='default'] {
+  background: var(--kakka-color-gray-100, #f0f0f0);
+  color: var(--kakka-color-gray-700, #333);
+  border-color: var(--kakka-color-gray-200, #e0e0e0);
+}
+
+/* variant: accent */
+.badge[data-variant='accent'] {
+  background: var(--kakka-color-gray-900, #111);
+  color: var(--kakka-color-gray-0, #fff);
+  border-color: var(--kakka-color-gray-900, #111);
+}
+
+/* variant: success */
+.badge[data-variant='success'] {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border-color: #a5d6a7;
+}
+
+/* variant: warning */
+.badge[data-variant='warning'] {
+  background: #fff8e1;
+  color: #e65100;
+  border-color: #ffe082;
+}
+
+/* variant: error */
+.badge[data-variant='error'] {
+  background: #fce4ec;
+  color: #b71c1c;
+  border-color: #ef9a9a;
+}

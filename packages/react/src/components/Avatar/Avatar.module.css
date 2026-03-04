@@ -1,0 +1,56 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--kakka-color-gray-200, #e0e0e0);
+  color: var(--kakka-color-gray-700, #333);
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+  font-family: var(--kakka-font-family-sans);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  /* size: md */
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}
+
+/* size: sm */
+.avatar[data-size='sm'] {
+  width: 28px;
+  height: 28px;
+  font-size: 10px;
+}
+
+/* size: lg */
+.avatar[data-size='lg'] {
+  width: 56px;
+  height: 56px;
+  font-size: 18px;
+}
+
+/* size: xl */
+.avatar[data-size='xl'] {
+  width: 80px;
+  height: 80px;
+  font-size: 26px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.initials {
+  line-height: 1;
+}
+
+.fallbackIcon {
+  width: 55%;
+  height: 55%;
+  color: var(--kakka-color-gray-500, #888);
+}

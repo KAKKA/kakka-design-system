@@ -1,0 +1,64 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+  font-family: var(--kakka-font-family-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 5px 10px;
+  border: 1.5px solid transparent;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* variant: default */
+.tag[data-variant='default'] {
+  background: var(--kakka-color-gray-100, #f0f0f0);
+  color: var(--kakka-color-gray-700, #333);
+  border-color: var(--kakka-color-gray-200, #e0e0e0);
+}
+
+/* variant: accent */
+.tag[data-variant='accent'] {
+  background: var(--kakka-color-gray-900, #111);
+  color: var(--kakka-color-gray-0, #fff);
+  border-color: var(--kakka-color-gray-900, #111);
+}
+
+.label {
+  display: inline-block;
+}
+
+.removeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.6;
+  border-radius: 2px;
+  transition: opacity 0.15s ease, background 0.15s ease;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.removeButton:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.tag[data-variant='accent'] .removeButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.removeButton:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000);
+  outline-offset: 1px;
+}

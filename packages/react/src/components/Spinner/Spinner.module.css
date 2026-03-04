@@ -1,0 +1,39 @@
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* size: md */
+  width: 24px;
+  height: 24px;
+}
+
+.spinner[data-size='sm'] {
+  width: 16px;
+  height: 16px;
+}
+
+.spinner[data-size='lg'] {
+  width: 40px;
+  height: 40px;
+}
+
+.ring {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--kakka-color-gray-200, #e0e0e0);
+  border-top-color: var(--kakka-color-gray-900, #111);
+  animation: spin 0.7s linear infinite;
+  box-sizing: border-box;
+}
+
+.spinner[data-size='lg'] .ring {
+  border-width: 3px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

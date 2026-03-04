@@ -1,0 +1,53 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--kakka-font-family-sans);
+  font-size: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  cursor: pointer;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+/* variant: default */
+.link[data-variant='default'] {
+  color: var(--kakka-color-gray-900, #111);
+  text-decoration-color: var(--kakka-color-gray-400, #aaa);
+}
+
+.link[data-variant='default']:hover {
+  color: var(--kakka-color-gray-700, #333);
+  text-decoration-color: var(--kakka-color-gray-700, #333);
+}
+
+.link[data-variant='default']:visited {
+  color: var(--kakka-color-gray-600, #555);
+}
+
+/* variant: subtle */
+.link[data-variant='subtle'] {
+  color: var(--kakka-color-gray-500, #888);
+  text-decoration-color: transparent;
+}
+
+.link[data-variant='subtle']:hover {
+  color: var(--kakka-color-gray-900, #111);
+  text-decoration-color: var(--kakka-color-gray-400, #aaa);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.externalIcon {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.6;
+  flex-shrink: 0;
+  vertical-align: middle;
+  margin-top: -1px;
+}

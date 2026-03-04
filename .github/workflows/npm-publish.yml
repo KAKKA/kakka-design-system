@@ -1,0 +1,43 @@
+name: Publish to npm (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Which package to publish'
+        required: true
+        type: choice
+        options:
+          - tokens
+          - react
+          - all
+      dry-run:
+        description: 'Dry run (no actual publish)'
+        type: boolean
+        default: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Publish @kakka/tokens
+        if: inputs.package == 'tokens' || inputs.package == 'all'
+        run: pnpm --filter @kakka/tokens publish ${{ inputs.dry-run && '--dry-run' || '' }} --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish @kakka/react
+        if: inputs.package == 'react' || inputs.package == 'all'
+        run: pnpm --filter @kakka/react publish ${{ inputs.dry-run && '--dry-run' || '' }} --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
