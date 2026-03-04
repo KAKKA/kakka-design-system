@@ -1,0 +1,20 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-md);
+  line-height: var(--kakka-line-height-normal);
+  color: var(--kakka-color-gray-800);
+  background-color: var(--kakka-color-gray-0);
+  -webkit-font-smoothing: antialiased;
+}

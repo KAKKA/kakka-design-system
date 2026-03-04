@@ -10,7 +10,9 @@
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs.js",
       "import": "./dist/index.es.js"
-    }
+    },
+    "./css": "./dist/react.css",
+    "./dist/react.css": "./dist/react.css"
   },
   "files": ["dist"],
   "scripts": {
@@ -30,6 +32,7 @@
   "devDependencies": {
     "@storybook/addon-a11y": "^8.6.12",
     "@storybook/addon-docs": "^8.6.12",
+    "@storybook/react": "^8.6.12",
     "@storybook/react-vite": "^8.6.12",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
