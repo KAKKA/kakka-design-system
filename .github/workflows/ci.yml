@@ -56,8 +56,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - uses: gradle/actions/setup-gradle@v4
-      - run: chmod +x gradlew
-      - run: ./gradlew :kakka-components:assembleRelease
+        with:
+          gradle-version: "8.10.2"
+      - run: gradle :kakka-components:assembleRelease
 
   ios-build:
     name: iOS Build
