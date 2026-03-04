@@ -64,7 +64,7 @@ fun MyScreen() {
 
 ### iOS (SwiftUI)
 
-Xcode の Swift Package Manager で `https://github.com/your-org/kakka-design-system` を追加：
+Xcode の Swift Package Manager で `https://github.com/KAKKA/kakka-design-system` を追加：
 
 ```swift
 import KakkaComponents
@@ -90,7 +90,7 @@ struct ContentView: View {
 ### セットアップ
 
 ```bash
-git clone https://github.com/your-org/kakka-design-system
+git clone https://github.com/KAKKA/kakka-design-system
 cd kakka-design-system
 pnpm install
 pnpm build:tokens
@@ -100,7 +100,7 @@ pnpm build:tokens
 
 ```bash
 pnpm storybook
-# → http://localhost:6006
+# → https://kakka.github.io/kakka-design-system/
 ```
 
 ### ビルド

@@ -112,7 +112,7 @@ export default function App() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => window.open('https://github.com/your-org/kakka-design-system', '_blank')}
+              onClick={() => window.open('https://github.com/KAKKA/kakka-design-system', '_blank')}
             >
               GitHub
             </Button>
@@ -156,14 +156,14 @@ export default function App() {
               <Button
                 variant="filled"
                 size="lg"
-                onClick={() => window.open('https://github.com/your-org/kakka-design-system', '_blank')}
+                onClick={() => window.open('https://github.com/KAKKA/kakka-design-system', '_blank')}
               >
                 Get Started
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => window.open('http://localhost:6006', '_blank')}
+                onClick={() => window.open('https://kakka.github.io/kakka-design-system/', '_blank')}
               >
                 View Storybook
               </Button>
@@ -403,14 +403,14 @@ export default function App() {
               <Button
                 variant="filled"
                 size="lg"
-                onClick={() => window.open('https://github.com/your-org/kakka-design-system', '_blank')}
+                onClick={() => window.open('https://github.com/KAKKA/kakka-design-system', '_blank')}
               >
                 GitHub で見る
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => window.open('http://localhost:6006', '_blank')}
+                onClick={() => window.open('https://kakka.github.io/kakka-design-system/', '_blank')}
               >
                 Storybook を開く
               </Button>
@@ -431,10 +431,10 @@ export default function App() {
               MIT License &nbsp;·&nbsp; Built with React + Style Dictionary
             </p>
             <div className={styles.footerLinks}>
-              <a href="https://github.com/your-org/kakka-design-system" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
+              <a href="https://github.com/KAKKA/kakka-design-system" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
                 GitHub
               </a>
-              <a href="http://localhost:6006" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
+              <a href="https://kakka.github.io/kakka-design-system/" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
                 Storybook
               </a>
             </div>
