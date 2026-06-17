@@ -1,0 +1,224 @@
+/* =====================================================
+   Drawer – サイドシートコンポーネント
+   Dialog.tsx と同じく <dialog> + showModal() ベース
+   ===================================================== */
+
+/* dialog のデフォルトスタイルをリセット */
+.drawer {
+  /* dialog 固有のデフォルトを上書き */
+  padding: 0;
+  border: none;
+  background: transparent;
+  /* 全画面サイズ（中身のパネルで実際の幅/高さを制御） */
+  max-width: 100vw;
+  max-height: 100dvh;
+  width: 100vw;
+  height: 100dvh;
+  overflow: visible;
+  /* showModal() により position: fixed になる。inset: 0 で全画面カバー */
+  inset: 0;
+  /* Flexboxでパネルを端に寄せる */
+  display: flex;
+}
+
+/* backdrop（半透明オーバーレイ） */
+.drawer::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity var(--kakka-motion-duration-slow, 300ms) ease;
+}
+
+.drawer[data-open='true']::backdrop {
+  opacity: 1;
+}
+
+/* showModal による open 属性付与時も同様 */
+.drawer[open]::backdrop {
+  opacity: 1;
+}
+
+/* =====================================================
+   パネル位置とサイドごとの配置
+   ===================================================== */
+
+/* right: 右端 */
+.drawer[data-side='right'] {
+  justify-content: flex-end;
+}
+
+/* left: 左端 */
+.drawer[data-side='left'] {
+  justify-content: flex-start;
+}
+
+/* bottom: 下端 */
+.drawer[data-side='bottom'] {
+  align-items: flex-end;
+  justify-content: stretch;
+}
+
+/* =====================================================
+   パネル本体
+   ===================================================== */
+
+.panel {
+  background: var(--kakka-color-semantic-background-default, #ffffff);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--kakka-elevation-4, 0 24px 80px rgba(0, 0, 0, 0.16));
+  /* アニメーション初期値（open でない状態） */
+  transition:
+    transform var(--kakka-motion-duration-slow, 300ms) cubic-bezier(0.4, 0, 0.2, 1),
+    opacity var(--kakka-motion-duration-slow, 300ms) ease;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* right */
+.drawer[data-side='right'] .panel {
+  height: 100dvh;
+  border-radius: var(--kakka-borderRadius-lg, 8px) 0 0 var(--kakka-borderRadius-lg, 8px);
+  transform: translateX(100%);
+}
+
+/* left */
+.drawer[data-side='left'] .panel {
+  height: 100dvh;
+  border-radius: 0 var(--kakka-borderRadius-lg, 8px) var(--kakka-borderRadius-lg, 8px) 0;
+  transform: translateX(-100%);
+}
+
+/* bottom */
+.drawer[data-side='bottom'] .panel {
+  width: 100%;
+  max-height: 85dvh;
+  border-radius: var(--kakka-borderRadius-xl, 12px) var(--kakka-borderRadius-xl, 12px) 0 0;
+  transform: translateY(100%);
+}
+
+/* =====================================================
+   サイズ（right / left 用の幅）
+   ===================================================== */
+
+.drawer[data-side='right'][data-size='sm'] .panel,
+.drawer[data-side='left'][data-size='sm'] .panel {
+  width: 320px;
+}
+
+.drawer[data-side='right'][data-size='md'] .panel,
+.drawer[data-side='left'][data-size='md'] .panel {
+  width: 400px;
+}
+
+.drawer[data-side='right'][data-size='lg'] .panel,
+.drawer[data-side='left'][data-size='lg'] .panel {
+  width: 520px;
+}
+
+/* =====================================================
+   open 状態のアニメーション
+   ===================================================== */
+
+.drawer[data-open='true'] .panel {
+  transform: translateX(0) translateY(0);
+  opacity: 1;
+}
+
+/* showModal による open 属性付与直後（data-open が立つ前）も開いた見た目にする */
+.drawer[open]:not([data-open='false']) .panel {
+  transform: translateX(0) translateY(0);
+  opacity: 1;
+}
+
+/* =====================================================
+   アクセシビリティ: prefers-reduced-motion
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: opacity var(--kakka-motion-duration-slow, 300ms) ease;
+    transform: none !important;
+  }
+
+  .drawer::backdrop {
+    transition: none;
+  }
+}
+
+/* =====================================================
+   ヘッダー
+   ===================================================== */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--kakka-spacing-5, 20px) var(--kakka-spacing-6, 24px) 0;
+  gap: var(--kakka-spacing-3, 12px);
+  min-height: 52px;
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--kakka-font-family-sans, sans-serif);
+  font-size: var(--kakka-font-size-lg, 18px);
+  font-weight: var(--kakka-font-weight-bold, 700);
+  color: var(--kakka-color-semantic-text-primary, #111111);
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--kakka-color-gray-500, #888888);
+  border-radius: var(--kakka-borderRadius-md, 6px);
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.closeButton:hover {
+  background: var(--kakka-color-gray-100, #f0f0f0);
+  color: var(--kakka-color-semantic-text-primary, #111111);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000000);
+  outline-offset: 2px;
+}
+
+/* =====================================================
+   ボディ（スクロール可能コンテンツ）
+   ===================================================== */
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--kakka-spacing-4, 16px) var(--kakka-spacing-6, 24px) var(--kakka-spacing-6, 24px);
+  font-family: var(--kakka-font-family-sans, sans-serif);
+  font-size: var(--kakka-font-size-sm, 14px);
+  color: var(--kakka-color-semantic-text-primary, #111111);
+  line-height: var(--kakka-font-lineHeight-normal, 1.6);
+}
+
+/* =====================================================
+   フッター（アクション）
+   ===================================================== */
+
+.footer {
+  flex-shrink: 0;
+  padding: var(--kakka-spacing-4, 16px) var(--kakka-spacing-6, 24px);
+  border-top: 1px solid var(--kakka-color-semantic-border-default, #e0e0e0);
+  display: flex;
+  align-items: center;
+  gap: var(--kakka-spacing-3, 12px);
+}

@@ -1,0 +1,107 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: var(--kakka-font-family-sans);
+}
+
+.header {
+  padding: var(--kakka-spacing-4, 16px) var(--kakka-spacing-3, 12px);
+}
+
+.scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--kakka-spacing-2, 8px) var(--kakka-spacing-3, 12px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--kakka-spacing-4, 16px);
+}
+
+.footer {
+  padding: var(--kakka-spacing-3, 12px);
+  border-top: 1px solid var(--kakka-color-semantic-border-default, #E0E0DB);
+}
+
+/* ─── Section ─── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kakka-spacing-1, 4px);
+}
+
+.sectionLabel {
+  padding: var(--kakka-spacing-1, 4px) var(--kakka-spacing-2, 8px);
+  font-size: 11px;
+  font-weight: var(--kakka-font-weight-medium, 500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+}
+
+.sectionItems {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ─── Item ─── */
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--kakka-spacing-2, 8px);
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--kakka-spacing-2, 8px);
+  border: none;
+  background: transparent;
+  border-radius: var(--kakka-borderRadius-md, 4px);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: var(--kakka-font-weight-regular, 400);
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--kakka-motion-duration-instant, 80ms) ease,
+    color var(--kakka-motion-duration-instant, 80ms) ease;
+}
+
+.item:hover {
+  background: var(--kakka-color-gray-100, #EFEFEC);
+  color: var(--kakka-color-semantic-text-primary, #1E1E19);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #1E1E19);
+  outline-offset: -2px;
+}
+
+.item[data-active='true'] {
+  background: var(--kakka-color-gray-200, #E0E0DB);
+  color: var(--kakka-color-semantic-text-primary, #1E1E19);
+  font-weight: var(--kakka-font-weight-medium, 500);
+}
+
+.itemIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.itemLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemTrailing {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+}

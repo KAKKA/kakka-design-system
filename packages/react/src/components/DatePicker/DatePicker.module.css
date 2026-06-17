@@ -1,0 +1,96 @@
+.root {
+  position: relative;
+  display: inline-block;
+}
+
+.fullWidth {
+  display: block;
+  width: 100%;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kakka-spacing-2, 8px);
+  width: 100%;
+  min-width: 200px;
+  padding: 10px 12px;
+  font-family: var(--kakka-font-family-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--kakka-color-semantic-text-primary, #1E1E19);
+  background: var(--kakka-color-semantic-background-default, #fff);
+  border: 1.5px solid var(--kakka-color-semantic-border-strong, #A8A89E);
+  border-radius: var(--kakka-borderRadius-md, 4px);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--kakka-motion-duration-fast, 120ms) ease,
+    box-shadow var(--kakka-motion-duration-fast, 120ms) ease;
+}
+
+.trigger > svg {
+  flex-shrink: 0;
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+}
+
+.triggerLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trigger[data-placeholder='true'] .triggerLabel {
+  color: var(--kakka-color-semantic-text-disabled, #A8A89E);
+}
+
+.trigger:hover:not(:disabled) {
+  border-color: var(--kakka-color-gray-500, #787870);
+}
+
+.trigger:focus-visible {
+  outline: none;
+  border-color: var(--kakka-color-semantic-border-focus, #1E1E19);
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.18);
+}
+
+.trigger[data-error='true'] {
+  border-color: var(--kakka-color-semantic-border-error, #C0392B);
+}
+
+.trigger:disabled {
+  background: var(--kakka-color-semantic-background-subtle, #F7F7F5);
+  color: var(--kakka-color-semantic-text-disabled, #A8A89E);
+  cursor: not-allowed;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: var(--kakka-zIndex-popover, 1400);
+  background: var(--kakka-color-semantic-background-default, #fff);
+  border: 1px solid var(--kakka-color-semantic-border-default, #E0E0DB);
+  border-radius: var(--kakka-borderRadius-lg, 8px);
+  box-shadow: var(--kakka-elevation-3, 0 4px 16px rgba(10, 10, 7, 0.1));
+  animation: dpFade var(--kakka-motion-duration-fast, 120ms)
+    var(--kakka-motion-easing-out, ease-out);
+}
+
+@keyframes dpFade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}

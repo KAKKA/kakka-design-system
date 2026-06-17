@@ -1,0 +1,52 @@
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 320px;
+  padding: var(--kakka-spacing-8, 32px) var(--kakka-spacing-6, 24px);
+  gap: var(--kakka-spacing-3, 12px);
+  font-family: var(--kakka-font-family-sans);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  color: var(--kakka-color-semantic-text-disabled, #a8a89e);
+  margin-bottom: var(--kakka-spacing-1, 4px);
+}
+
+/* アイコン内のSVGを48pxに統一 */
+.icon > svg,
+.icon > img {
+  width: 48px;
+  height: 48px;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--kakka-font-size-md, 16px);
+  font-weight: var(--kakka-font-weight-bold, 700);
+  color: var(--kakka-color-semantic-text-primary, #1e1e19);
+  line-height: var(--kakka-font-lineHeight-tight, 1.25);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--kakka-font-size-sm, 14px);
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+  line-height: var(--kakka-font-lineHeight-normal, 1.6);
+  max-width: 360px;
+}
+
+.action {
+  margin-top: var(--kakka-spacing-2, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kakka-spacing-2, 8px);
+}

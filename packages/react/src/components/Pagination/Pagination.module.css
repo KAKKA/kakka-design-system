@@ -1,0 +1,129 @@
+/* ─── ルート nav ─────────────────────────────────────────────────────────────── */
+
+.root {
+  display: flex;
+  align-items: center;
+  gap: var(--kakka-spacing-3, 12px);
+  flex-wrap: wrap;
+}
+
+/* ─── 件数テキスト ──────────────────────────────────────────────────────────── */
+
+.count {
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-sm, 14px);
+  color: var(--kakka-color-semantic-text-secondary, #555);
+  white-space: nowrap;
+}
+
+/* ─── コントロール行 ─────────────────────────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--kakka-spacing-1, 4px);
+}
+
+/* ─── 前へ / 次へ ボタン ─────────────────────────────────────────────────────── */
+
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kakka-spacing-1, 4px);
+  height: 32px;
+  padding: 0 var(--kakka-spacing-3, 12px);
+  border: 1px solid var(--kakka-color-semantic-border-default, #e5e5e5);
+  border-radius: var(--kakka-borderRadius-md, 6px);
+  background: var(--kakka-color-gray-0, #ffffff);
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-sm, 14px);
+  font-weight: var(--kakka-font-weight-medium, 500);
+  color: var(--kakka-color-semantic-text-primary, #111);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.navButton:hover:not(:disabled) {
+  background: var(--kakka-color-gray-50, #f9f9f9);
+  border-color: var(--kakka-color-semantic-border-strong, #aaa);
+}
+
+.navButton:active:not(:disabled) {
+  background: var(--kakka-color-gray-100, #f0f0f0);
+}
+
+.navButton:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000);
+  outline-offset: 2px;
+}
+
+.navButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ─── ページ番号リスト ──────────────────────────────────────────────────────── */
+
+.pageList {
+  display: flex;
+  align-items: center;
+  gap: var(--kakka-spacing-1, 4px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── ページ番号ボタン ──────────────────────────────────────────────────────── */
+
+.pageButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 var(--kakka-spacing-1, 4px);
+  border: 1px solid transparent;
+  border-radius: var(--kakka-borderRadius-md, 6px);
+  background: transparent;
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-sm, 14px);
+  font-weight: var(--kakka-font-weight-regular, 400);
+  color: var(--kakka-color-semantic-text-primary, #111);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+    font-weight 0.15s ease;
+  line-height: 1;
+}
+
+.pageButton:hover:not(:disabled):not([data-current='true']) {
+  background: var(--kakka-color-gray-100, #f0f0f0);
+}
+
+.pageButton:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000);
+  outline-offset: 2px;
+}
+
+/* 現在ページ */
+.pageButton[data-current='true'] {
+  background: var(--kakka-color-gray-900, #111);
+  color: var(--kakka-color-gray-0, #ffffff);
+  font-weight: var(--kakka-font-weight-bold, 700);
+  cursor: default;
+  border-color: var(--kakka-color-gray-900, #111);
+}
+
+/* ─── 省略記号 ──────────────────────────────────────────────────────────────── */
+
+.ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-sm, 14px);
+  color: var(--kakka-color-semantic-text-secondary, #555);
+  user-select: none;
+}

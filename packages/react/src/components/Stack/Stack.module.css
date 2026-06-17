@@ -1,0 +1,53 @@
+.stack {
+  display: flex;
+  min-width: 0;
+}
+
+.stack[data-inline='true'] {
+  display: inline-flex;
+}
+
+.stack[data-direction='column'] {
+  flex-direction: column;
+}
+.stack[data-direction='row'] {
+  flex-direction: row;
+}
+
+.stack[data-wrap='true'] {
+  flex-wrap: wrap;
+}
+
+/* align-items（交差軸） */
+.stack[data-align='start'] {
+  align-items: flex-start;
+}
+.stack[data-align='center'] {
+  align-items: center;
+}
+.stack[data-align='end'] {
+  align-items: flex-end;
+}
+.stack[data-align='stretch'] {
+  align-items: stretch;
+}
+.stack[data-align='baseline'] {
+  align-items: baseline;
+}
+
+/* justify-content（主軸） */
+.stack[data-justify='start'] {
+  justify-content: flex-start;
+}
+.stack[data-justify='center'] {
+  justify-content: center;
+}
+.stack[data-justify='end'] {
+  justify-content: flex-end;
+}
+.stack[data-justify='between'] {
+  justify-content: space-between;
+}
+.stack[data-justify='around'] {
+  justify-content: space-around;
+}

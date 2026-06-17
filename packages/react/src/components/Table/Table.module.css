@@ -1,0 +1,102 @@
+/* ─────────────────────────────────────────────
+   Table コンポーネント
+   ───────────────────────────────────────────── */
+
+/* 横スクロール可能なラッパ */
+.wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: var(--kakka-font-size-sm, 14px);
+  color: var(--kakka-color-semantic-text-primary, #1e1e19);
+  background: var(--kakka-color-semantic-background-default, #ffffff);
+}
+
+/* ─── ヘッダ ─── */
+.thead {
+  background: var(--kakka-color-gray-50, #f7f7f5);
+}
+
+.th {
+  height: 40px;
+  padding: 0 var(--kakka-spacing-4, 16px);
+  font-size: var(--kakka-font-size-xs, 12px);
+  font-weight: var(--kakka-font-weight-bold, 700);
+  letter-spacing: 0.04em;
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+  white-space: nowrap;
+  /* ヘッダ下端に濃いめのボーダー */
+  border-bottom: 1px solid var(--kakka-color-gray-300, #c8c8c1);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.th[data-monospace='true'] {
+  font-family: var(--kakka-font-family-mono, 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace);
+}
+
+/* ─── ボディ ─── */
+.tbody {
+  /* ゼブラ縞なし */
+}
+
+.tr {
+  border-bottom: 1px solid var(--kakka-color-semantic-border-default, #e0e0db);
+  transition: background-color 0.15s ease;
+}
+
+.tr:last-child {
+  border-bottom: none;
+}
+
+/* ホバー（hoverable または onRowClick がある場合に data-hoverable="true" が付く） */
+.table[data-hoverable='true'] .tr:hover {
+  background: var(--kakka-color-gray-50, #f7f7f5);
+}
+
+/* ─── セル ─── */
+.td {
+  padding: 0 var(--kakka-spacing-4, 16px);
+  vertical-align: middle;
+  color: var(--kakka-color-semantic-text-primary, #1e1e19);
+}
+
+.td[data-monospace='true'] {
+  font-family: var(--kakka-font-family-mono, 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace);
+}
+
+/* ─── 行の高さ（density） ─── */
+.table[data-density='standard'] .td,
+.table[data-density='standard'] .tr {
+  height: 48px;
+}
+
+.table[data-density='compact'] .td,
+.table[data-density='compact'] .tr {
+  height: 36px;
+}
+
+/* ─── 空状態 ─── */
+.emptyCell {
+  text-align: center;
+  padding: var(--kakka-spacing-8, 32px) var(--kakka-spacing-4, 16px);
+  vertical-align: middle;
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+}
+
+.emptyDefault {
+  display: inline-block;
+  font-size: var(--kakka-font-size-sm, 14px);
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+}
+
+/* ─── フォーカス（キーボード操作） ─── */
+.tr:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #1e1e19);
+  outline-offset: -2px;
+}

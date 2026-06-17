@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kakka-spacing-2, 8px);
+  padding-bottom: var(--kakka-spacing-5, 20px);
+  border-bottom: 1px solid var(--kakka-color-semantic-border-default, #E0E0DB);
+}
+
+.breadcrumbs {
+  font-size: 13px;
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--kakka-spacing-4, 16px);
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-2xl, 24px);
+  font-weight: var(--kakka-font-weight-bold, 700);
+  line-height: var(--kakka-font-lineHeight-tight, 1.25);
+  letter-spacing: -0.01em;
+  color: var(--kakka-color-semantic-text-primary, #1E1E19);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--kakka-spacing-2, 8px);
+  flex-shrink: 0;
+}
+
+.description {
+  margin: 0;
+  max-width: 70ch;
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-sm, 14px);
+  line-height: var(--kakka-font-lineHeight-normal, 1.6);
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+}

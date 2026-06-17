@@ -8,7 +8,25 @@ Android・iOS・Web（React）に統一したビジュアル言語を提供し�
 - **モノトーン × ウォームアクセント** - 微かな温かみを持つグレースケールと、ウォームブラウンのアクセントカラー
 - **クロスプラットフォーム** - デザイントークンで Web / Android / iOS を統一
 - **アクセシビリティ** - WCAG 2.2 AA 準拠を目指した設計
-- **18 コンポーネント** - Button、Input、Checkbox、Radio、Select、Badge、Tag、Avatar など
+- **40+ コンポーネント（Web）** - 原子から、レイアウト・構造・複雑系・レシピまでをカバー
+- **設計思想** - Stripe / Notion 等の洗練プロダクトを参考に「境界線より余白・色差」「影は浮遊要素のみ」「状態色は薄背景＋濃文字」を採用
+
+## コンポーネント階層（Web / React）
+
+複雑なアプリを「出荷できる品質」で組み立てられるよう、原子だけでなく上位の階層まで提供します。
+
+| 階層 | コンポーネント |
+|---|---|
+| 基本 | Button, Input, Textarea, Select, Checkbox, Radio, Switch, Label, Link, Badge, Tag, Avatar, Divider, Spinner |
+| レイアウト原子 | **Stack**, **Grid**, **Container** |
+| 構造パターン | **Field**, **PageHeader**, **AppShell**, **Sidebar** |
+| ナビ/コントロール | **Tabs**, **SegmentedControl**, Accordion, Breadcrumbs, **Pagination** |
+| フィードバック/オーバーレイ | **Alert**, Toast, **Tooltip**, Dialog, **Drawer**, **Menu**, **Popover**, **EmptyState**, **Skeleton** |
+| データ表示 | Card, **Table**, **Stat** |
+| フロー/日付 | **Stepper**, **DatePicker**（Calendar・単日/期間・依存ライブラリなし） |
+| レシピ | **予約フロー**, **ダッシュボード**（Storybook の `Recipes/` 参照） |
+
+> Android (Compose) / iOS (SwiftUI) には基本コンポーネントに加え、Alert・Stat・Stepper・Switch・EmptyState・SegmentedControl を順次移植中。トークン層は全プラットフォームで同期済み。
 
 ## パッケージ構成
 

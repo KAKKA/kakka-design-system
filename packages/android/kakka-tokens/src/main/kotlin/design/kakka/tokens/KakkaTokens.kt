@@ -28,10 +28,18 @@ object KakkaColors {
     val accentPrimaryDark    = Color(0xFF5C4A35)
     val accentSecondary      = Color(0xFF4A6741)
 
-    // Status
+    // Status (前景・濃色)
     val statusError   = Color(0xFFC0392B)
     val statusWarning = Color(0xFFB7860B)
     val statusSuccess = Color(0xFF4A6741)
+    val statusInfo    = Color(0xFF363630) // gray700
+
+    // Status background (薄背景tint — Alert/Badge用)
+    val statusBgError   = Color(0xFFFBEAE7)
+    val statusBgWarning = Color(0xFFFAF3E0)
+    val statusBgSuccess = Color(0xFFE8EFE6)
+    val statusBgInfo    = Color(0xFFEFEFEC) // gray100
+    val statusBgNeutral = Color(0xFFEFEFEC) // gray100
 }
 
 object KakkaSpacing {

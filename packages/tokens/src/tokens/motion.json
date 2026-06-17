@@ -1,0 +1,17 @@
+{
+  "motion": {
+    "duration": {
+      "instant": { "$value": "80ms",  "$type": "duration", "$description": "ホバー等の即応" },
+      "fast":    { "$value": "120ms", "$type": "duration", "$description": "メニュー出現" },
+      "normal":  { "$value": "180ms", "$type": "duration", "$description": "標準トランジション" },
+      "slow":    { "$value": "300ms", "$type": "duration", "$description": "ドロワー/サイドバー開閉" }
+    },
+    "easing": {
+      "standard": { "$value": "cubic-bezier(0.2, 0, 0, 1)",    "$type": "cubicBezier", "$description": "標準（出入り）" },
+      "out":      { "$value": "cubic-bezier(0, 0, 0.2, 1)",    "$type": "cubicBezier", "$description": "減速（出現）" },
+      "in":       { "$value": "cubic-bezier(0.4, 0, 1, 1)",    "$type": "cubicBezier", "$description": "加速（退場）" },
+      "inOut":    { "$value": "cubic-bezier(0.4, 0, 0.2, 1)",  "$type": "cubicBezier" }
+    },
+    "tooltipDelay": { "$value": "300ms", "$type": "duration", "$description": "Tooltip表示遅延" }
+  }
+}

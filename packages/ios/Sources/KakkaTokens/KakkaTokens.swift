@@ -21,10 +21,18 @@ public enum KakkaColors {
     public static let accentPrimaryDark    = Color(red: 0.3608, green: 0.2902, blue: 0.2078)
     public static let accentSecondary      = Color(red: 0.2902, green: 0.4039, blue: 0.2549)
 
-    // Status
+    // Status（前景・濃色）
     public static let error   = Color(red: 0.7529, green: 0.2235, blue: 0.1686)
     public static let warning = Color(red: 0.7176, green: 0.5255, blue: 0.0431)
     public static let success = Color(red: 0.2902, green: 0.4039, blue: 0.2549)
+    public static let info    = Color(red: 0.2118, green: 0.2118, blue: 0.1882) // gray700
+
+    // Status background（薄背景tint — Alert/Badge用）
+    public static let statusBgError   = Color(red: 0.9843, green: 0.9176, blue: 0.9059)
+    public static let statusBgWarning = Color(red: 0.9804, green: 0.9529, blue: 0.8784)
+    public static let statusBgSuccess = Color(red: 0.9098, green: 0.9373, blue: 0.9020)
+    public static let statusBgInfo    = Color(red: 0.9373, green: 0.9373, blue: 0.9255) // gray100
+    public static let statusBgNeutral = Color(red: 0.9373, green: 0.9373, blue: 0.9255) // gray100
 }
 
 // MARK: - KakkaSpacing

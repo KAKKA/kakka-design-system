@@ -1,0 +1,14 @@
+{
+  "zIndex": {
+    "base":     { "$value": "0",    "$type": "number" },
+    "raised":   { "$value": "10",   "$type": "number", "$description": "stickyヘッダ等" },
+    "dropdown": { "$value": "1000", "$type": "number", "$description": "Menu/Select/Popover" },
+    "sticky":   { "$value": "1100", "$type": "number" },
+    "overlay":  { "$value": "1200", "$type": "number", "$description": "Drawer/Dialogの背面" },
+    "drawer":   { "$value": "1250", "$type": "number" },
+    "modal":    { "$value": "1300", "$type": "number" },
+    "popover":  { "$value": "1400", "$type": "number" },
+    "toast":    { "$value": "1500", "$type": "number" },
+    "tooltip":  { "$value": "1600", "$type": "number" }
+  }
+}

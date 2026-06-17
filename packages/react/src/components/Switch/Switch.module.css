@@ -1,0 +1,94 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kakka-spacing-2, 8px);
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--kakka-font-family-sans);
+}
+
+.wrapperDisabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* visually hidden native input */
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* track */
+.track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: var(--kakka-borderRadius-full, 9999px);
+  background: var(--kakka-color-gray-300, #bbb);
+  transition: background 0.2s ease;
+
+  /* size=md */
+  width: 40px;
+  height: 22px;
+  padding: 2px;
+}
+
+.track[data-size='sm'] {
+  width: 32px;
+  height: 18px;
+  padding: 2px;
+}
+
+.track[data-checked='true'] {
+  background: var(--kakka-color-accent-primary-default, #8b7355);
+}
+
+/* knob */
+.knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background: var(--kakka-color-gray-0, #fff);
+  border-radius: var(--kakka-borderRadius-full, 9999px);
+  box-shadow: var(--kakka-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease;
+
+  /* size=md: track=40px, knob=18px, offset when on = 40-22+2-2=18px knob width */
+  width: 18px;
+  height: 18px;
+}
+
+.track[data-checked='true'] .knob {
+  /* translate to right: track(40) - padding*2(4) - knob(18) = 18px */
+  transform: translateX(18px);
+}
+
+.track[data-size='sm'] .knob {
+  width: 14px;
+  height: 14px;
+}
+
+.track[data-size='sm'][data-checked='true'] .knob {
+  /* track(32) - padding*2(4) - knob(14) = 14px */
+  transform: translateX(14px);
+}
+
+/* focus ring on the track when the hidden input is focused */
+.input:focus-visible + .track {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000);
+  outline-offset: 2px;
+}
+
+.label {
+  font-size: var(--kakka-font-size-sm, 14px);
+  color: var(--kakka-color-semantic-text-primary, #111);
+  line-height: var(--kakka-font-lineHeight-normal, 1.6);
+}
