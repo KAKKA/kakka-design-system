@@ -1,0 +1,20 @@
+.grid {
+  display: grid;
+  min-width: 0;
+}
+
+.grid[data-align='start'] {
+  align-items: start;
+}
+.grid[data-align='center'] {
+  align-items: center;
+}
+.grid[data-align='end'] {
+  align-items: end;
+}
+.grid[data-align='stretch'] {
+  align-items: stretch;
+}
+.grid[data-align='baseline'] {
+  align-items: baseline;
+}

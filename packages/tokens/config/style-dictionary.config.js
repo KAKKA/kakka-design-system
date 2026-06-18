@@ -7,15 +7,23 @@ StyleDictionary.registerFormat({
   format: ({ dictionary }) => {
     const vars = dictionary.allTokens
       .map(token => {
-        // Use original.$value (pre-transform) to avoid size/rem auto-conversion
-        const rawVal = token.original?.$value ?? token.$value ?? token.value;
         const tokenType = token.$type ?? token.type;
-        // For dimensions without units, add px
-        let val = rawVal;
-        if (tokenType === 'dimension' && typeof rawVal === 'string' && /^\d+(\.\d+)?$/.test(rawVal)) {
-          val = rawVal === '0' ? '0' : `${rawVal}px`;
-        } else if (tokenType === 'dimension' && typeof rawVal === 'number') {
-          val = rawVal === 0 ? '0' : `${rawVal}px`;
+        const orig = token.original?.$value;
+        // エイリアス（参照）トークンは解決済みの値を出力する。
+        // 非エイリアスは original.$value を使い size/rem 自動変換を回避する。
+        const isAlias = typeof orig === 'string' && orig.includes('{');
+        let val;
+        if (isAlias) {
+          val = token.$value ?? token.value;
+        } else {
+          const rawVal = orig ?? token.$value ?? token.value;
+          val = rawVal;
+          // For dimensions without units, add px
+          if (tokenType === 'dimension' && typeof rawVal === 'string' && /^\d+(\.\d+)?$/.test(rawVal)) {
+            val = rawVal === '0' ? '0' : `${rawVal}px`;
+          } else if (tokenType === 'dimension' && typeof rawVal === 'number') {
+            val = rawVal === 0 ? '0' : `${rawVal}px`;
+          }
         }
         return `  --kakka-${token.path.join('-')}: ${val};`;
       })

@@ -1,0 +1,211 @@
+/* =====================================================
+   Stepper – ステップ進行表示コンポーネント
+   ===================================================== */
+
+/* コンテナ */
+.stepper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+/* horizontal レイアウト */
+.stepper[data-orientation='horizontal'] {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* vertical レイアウト */
+.stepper[data-orientation='vertical'] {
+  flex-direction: column;
+}
+
+/* =====================================================
+   ステップ（li）
+   ===================================================== */
+
+.step {
+  display: flex;
+  position: relative;
+}
+
+/* horizontal: 各ステップを横並びに、最後以外は flex:1 で均等配置 */
+.stepper[data-orientation='horizontal'] .step {
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.stepper[data-orientation='horizontal'] .step[data-last='true'] {
+  flex: 0 0 auto;
+}
+
+/* vertical: 縦積み */
+.stepper[data-orientation='vertical'] .step {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--kakka-spacing-3, 12px);
+}
+
+/* =====================================================
+   円とコネクターを包むトラック
+   ===================================================== */
+
+.stepTrack {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.stepper[data-orientation='horizontal'] .stepTrack {
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.stepper[data-orientation='vertical'] .stepTrack {
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   丸アイコン
+   ===================================================== */
+
+.circle {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--kakka-borderRadius-full, 9999px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: var(--kakka-font-size-xs, 12px);
+  font-weight: var(--kakka-font-weight-bold, 700);
+  font-family: var(--kakka-font-family-sans, sans-serif);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* 完了ステップ（チェックアイコン） */
+.step[data-state='completed'] .circle {
+  background: var(--kakka-color-accent-primary-default, #8b7355);
+  color: var(--kakka-color-gray-0, #ffffff);
+  border: 2px solid var(--kakka-color-accent-primary-default, #8b7355);
+}
+
+/* 現在ステップ（番号） */
+.step[data-state='current'] .circle {
+  background: var(--kakka-color-accent-primary-default, #8b7355);
+  color: var(--kakka-color-gray-0, #ffffff);
+  border: 2px solid var(--kakka-color-accent-primary-default, #8b7355);
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.2);
+}
+
+/* 未到達ステップ（グレー枠のみ） */
+.step[data-state='pending'] .circle {
+  background: var(--kakka-color-gray-0, #ffffff);
+  color: var(--kakka-color-semantic-text-secondary, #888888);
+  border: 2px solid var(--kakka-color-gray-300, #cccccc);
+}
+
+/* =====================================================
+   番号テキスト
+   ===================================================== */
+
+.stepNumber {
+  line-height: 1;
+  display: block;
+}
+
+/* =====================================================
+   コネクター（ステップ間の線）
+   ===================================================== */
+
+.connector {
+  flex: 1;
+  height: 2px;
+  transition: background 0.15s ease;
+}
+
+/* horizontal: 横線 */
+.stepper[data-orientation='horizontal'] .connector {
+  width: 100%;
+  height: 2px;
+  min-width: var(--kakka-spacing-4, 16px);
+}
+
+/* vertical: 縦線 */
+.stepper[data-orientation='vertical'] .connector {
+  width: 2px;
+  height: var(--kakka-spacing-8, 32px);
+  min-height: var(--kakka-spacing-4, 16px);
+  flex: 0 0 auto;
+}
+
+/* 完了区間のコネクター（accent色） */
+.step[data-state='completed'] .connector {
+  background: var(--kakka-color-accent-primary-default, #8b7355);
+}
+
+/* 現在・未到達区間のコネクター（ボーダー色） */
+.step[data-state='current'] .connector,
+.step[data-state='pending'] .connector {
+  background: var(--kakka-color-semantic-border-default, #e0e0e0);
+}
+
+/* =====================================================
+   ラベルエリア
+   ===================================================== */
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kakka-spacing-0, 2px);
+}
+
+.stepper[data-orientation='horizontal'] .stepContent {
+  align-items: center;
+  text-align: center;
+  margin-top: var(--kakka-spacing-2, 8px);
+  padding: 0 var(--kakka-spacing-1, 4px);
+}
+
+.stepper[data-orientation='vertical'] .stepContent {
+  align-items: flex-start;
+  padding-top: 4px; /* 円の上端と揃える */
+  padding-bottom: var(--kakka-spacing-4, 16px);
+  min-width: 0;
+}
+
+.stepLabel {
+  font-family: var(--kakka-font-family-sans, sans-serif);
+  font-size: var(--kakka-font-size-sm, 14px);
+  font-weight: var(--kakka-font-weight-medium, 500);
+  line-height: var(--kakka-font-lineHeight-tight, 1.25);
+  transition: color 0.15s ease;
+}
+
+/* 現在・完了ステップのラベル */
+.step[data-state='current'] .stepLabel,
+.step[data-state='completed'] .stepLabel {
+  color: var(--kakka-color-semantic-text-primary, #111111);
+}
+
+/* 未到達ステップのラベル */
+.step[data-state='pending'] .stepLabel {
+  color: var(--kakka-color-semantic-text-secondary, #888888);
+}
+
+.stepDescription {
+  font-family: var(--kakka-font-family-sans, sans-serif);
+  font-size: 12px;
+  font-weight: var(--kakka-font-weight-regular, 400);
+  line-height: var(--kakka-font-lineHeight-normal, 1.6);
+  color: var(--kakka-color-semantic-text-secondary, #888888);
+}

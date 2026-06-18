@@ -1,0 +1,70 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tablist {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  border-bottom: 1px solid var(--kakka-color-semantic-border-default, #e0e0e0);
+}
+
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 var(--kakka-spacing-4, 16px);
+  border: none;
+  background: transparent;
+  color: var(--kakka-color-semantic-text-secondary, #555);
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-sm, 14px);
+  font-weight: var(--kakka-font-weight-regular, 400);
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color 0.12s ease;
+  /* bottom line indicator */
+  bottom: -1px;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  border-radius: 1px 1px 0 0;
+  transition: background 0.12s ease;
+}
+
+.tab[data-selected='true'] {
+  color: var(--kakka-color-semantic-text-primary, #111);
+  font-weight: var(--kakka-font-weight-medium, 500);
+}
+
+.tab[data-selected='true']::after {
+  background: var(--kakka-color-accent-primary-default, #8b7355);
+}
+
+.tab:hover:not(:disabled):not([data-selected='true']) {
+  color: var(--kakka-color-semantic-text-primary, #111);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

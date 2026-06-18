@@ -1,0 +1,115 @@
+/* ─── コンテナ ─────────────────────────────────────────────────────────────── */
+
+.root {
+  position: relative;
+  display: inline-flex;
+}
+
+/* ─── ドロップダウンリスト ──────────────────────────────────────────────────── */
+
+.list {
+  position: absolute;
+  top: calc(100% + var(--kakka-spacing-1, 4px));
+  z-index: var(--kakka-zIndex-dropdown, 1000);
+  min-width: 160px;
+  background: var(--kakka-color-gray-0, #ffffff);
+  border: 1px solid var(--kakka-color-semantic-border-default, #e5e5e5);
+  border-radius: var(--kakka-borderRadius-lg, 8px);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+  padding: var(--kakka-spacing-1, 4px);
+  /* 出現アニメーション */
+  animation: menuEnter 0.12s ease forwards;
+  outline: none;
+}
+
+@keyframes menuEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 水平アライン */
+.list[data-align='start'] {
+  left: 0;
+}
+.list[data-align='end'] {
+  right: 0;
+}
+
+/* ─── メニュー項目 ───────────────────────────────────────────────────────────── */
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--kakka-spacing-2, 8px);
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--kakka-spacing-3, 12px);
+  background: transparent;
+  border: none;
+  border-radius: var(--kakka-borderRadius-sm, 4px);
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-sm, 14px);
+  font-weight: var(--kakka-font-weight-regular, 400);
+  color: var(--kakka-color-semantic-text-primary, #111);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.item:hover:not(:disabled) {
+  background: var(--kakka-color-gray-100, #f0f0f0);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--kakka-color-semantic-border-focus, #000);
+  outline-offset: -2px;
+}
+
+.item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* danger バリアント */
+.item[data-danger='true'] {
+  color: var(--kakka-color-semantic-status-error, #e53e3e);
+}
+
+.item[data-danger='true']:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--kakka-color-semantic-status-error, #e53e3e) 8%, transparent);
+}
+
+/* ─── アイコン ───────────────────────────────────────────────────────────────── */
+
+.itemIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.itemLabel {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── セパレータ ─────────────────────────────────────────────────────────────── */
+
+.separator {
+  height: 1px;
+  background: var(--kakka-color-semantic-border-default, #e5e5e5);
+  margin: var(--kakka-spacing-1, 4px) var(--kakka-spacing-3, 12px);
+}

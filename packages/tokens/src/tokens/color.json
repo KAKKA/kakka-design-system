@@ -29,7 +29,11 @@
         "secondary": { "$value": "{color.gray.600}", "$type": "color" },
         "disabled":  { "$value": "{color.gray.400}", "$type": "color" },
         "inverse":   { "$value": "{color.gray.0}",   "$type": "color" },
-        "accent":    { "$value": "{color.accent.primary.default}", "$type": "color" }
+        "accent":    { "$value": "{color.accent.primary.default}", "$type": "color" },
+        "error":     { "$value": "{color.semantic.status.error}",   "$type": "color" },
+        "warning":   { "$value": "{color.semantic.status.warning}", "$type": "color" },
+        "success":   { "$value": "{color.semantic.status.success}", "$type": "color" },
+        "info":      { "$value": "{color.semantic.status.info}",    "$type": "color" }
       },
       "background": {
         "default":  { "$value": "{color.gray.0}",   "$type": "color" },
@@ -40,13 +44,24 @@
       "border": {
         "default":  { "$value": "{color.gray.200}", "$type": "color" },
         "strong":   { "$value": "{color.gray.400}", "$type": "color" },
-        "focus":    { "$value": "{color.gray.800}", "$type": "color" }
+        "focus":    { "$value": "{color.gray.800}", "$type": "color" },
+        "accent":   { "$value": "{color.accent.primary.default}", "$type": "color" },
+        "error":    { "$value": "{color.semantic.status.error}",   "$type": "color" },
+        "warning":  { "$value": "{color.semantic.status.warning}", "$type": "color" },
+        "success":  { "$value": "{color.semantic.status.success}", "$type": "color" }
       },
       "status": {
-        "error":   { "$value": "#C0392B", "$type": "color" },
-        "warning": { "$value": "#B7860B", "$type": "color" },
-        "success": { "$value": "#4A6741", "$type": "color" },
-        "info":    { "$value": "{color.gray.700}", "$type": "color" }
+        "error":   { "$value": "#C0392B", "$type": "color", "$description": "テラコッタ寄りレッド" },
+        "warning": { "$value": "#B7860B", "$type": "color", "$description": "アンバー" },
+        "success": { "$value": "#4A6741", "$type": "color", "$description": "オリーブグリーン" },
+        "info":    { "$value": "{color.gray.700}", "$type": "color", "$description": "ニュートラル情報" }
+      },
+      "statusBg": {
+        "error":   { "$value": "#FBEAE7", "$type": "color", "$description": "薄テラコッタ背景（Badge/Alert）" },
+        "warning": { "$value": "#FAF3E0", "$type": "color", "$description": "薄アンバー背景" },
+        "success": { "$value": "#E8EFE6", "$type": "color", "$description": "薄オリーブ背景" },
+        "info":    { "$value": "{color.gray.100}", "$type": "color", "$description": "ニュートラル背景" },
+        "neutral": { "$value": "{color.gray.100}", "$type": "color", "$description": "中立バッジ背景" }
       }
     }
   }

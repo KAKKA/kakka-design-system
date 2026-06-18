@@ -51,3 +51,94 @@ export { Textarea } from './components/Textarea';
 export type { TextareaProps } from './components/Textarea';
 
 export { Toast, ToastContainer, useToast } from './components/Toast';
+
+// Layout primitives
+export { Stack } from './components/Stack';
+export type {
+  StackProps,
+  StackDirection,
+  StackAlign,
+  StackJustify,
+  SpaceScale,
+} from './components/Stack';
+
+export { Grid } from './components/Grid';
+export type { GridProps } from './components/Grid';
+
+export { Container } from './components/Container';
+export type { ContainerProps, ContainerSize } from './components/Container';
+
+// Form & structure patterns
+export { Field } from './components/Field';
+export type { FieldProps } from './components/Field';
+
+export { PageHeader } from './components/PageHeader';
+export type { PageHeaderProps } from './components/PageHeader';
+
+export { AppShell } from './components/AppShell';
+export type { AppShellProps } from './components/AppShell';
+
+export { Sidebar, SidebarSection, SidebarItem } from './components/Sidebar';
+export type {
+  SidebarProps,
+  SidebarSectionProps,
+  SidebarItemProps,
+} from './components/Sidebar';
+
+// Controls
+export { Tabs } from './components/Tabs';
+export type { TabsProps, TabItem } from './components/Tabs';
+
+export { SegmentedControl } from './components/SegmentedControl';
+export type {
+  SegmentedControlProps,
+  SegmentOption,
+  SegmentedControlSize,
+} from './components/SegmentedControl';
+
+export { Switch } from './components/Switch';
+export type { SwitchProps, SwitchSize } from './components/Switch';
+
+// Feedback & overlays
+export { Alert } from './components/Alert';
+export type { AlertProps, AlertVariant } from './components/Alert';
+
+export { Tooltip } from './components/Tooltip';
+export type { TooltipProps, TooltipPlacement } from './components/Tooltip';
+
+export { EmptyState } from './components/EmptyState';
+export type { EmptyStateProps } from './components/EmptyState';
+
+export { Skeleton } from './components/Skeleton';
+export type { SkeletonProps, SkeletonVariant, SkeletonTextProps } from './components/Skeleton';
+
+export { Menu, MenuItem, MenuSeparator } from './components/Menu';
+export type { MenuProps, MenuItemProps, MenuItemData, MenuAlign } from './components/Menu';
+
+export { Popover } from './components/Popover';
+export type { PopoverProps, PopoverPlacement } from './components/Popover';
+
+export { Drawer } from './components/Drawer';
+export type { DrawerProps, DrawerSide, DrawerSize } from './components/Drawer';
+
+// Data display
+export { Table } from './components/Table';
+export type { TableProps, TableColumn, TableDensity } from './components/Table';
+
+export { Stat } from './components/Stat';
+export type { StatProps, StatDeltaDirection } from './components/Stat';
+
+export { Pagination } from './components/Pagination';
+export type { PaginationProps } from './components/Pagination';
+
+// Flow & dates
+export { Stepper } from './components/Stepper';
+export type { StepperProps, StepItem, StepperOrientation } from './components/Stepper';
+
+export { DatePicker, Calendar } from './components/DatePicker';
+export type {
+  DatePickerProps,
+  CalendarProps,
+  CalendarMode,
+  DateRange,
+} from './components/DatePicker';

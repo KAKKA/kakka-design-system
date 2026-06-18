@@ -1,0 +1,101 @@
+/* ─── コンテナ ─────────────────────────────────────────────────────────────── */
+
+.root {
+  position: relative;
+  display: inline-flex;
+}
+
+/* ─── パネル ────────────────────────────────────────────────────────────────── */
+
+.panel {
+  position: absolute;
+  z-index: var(--kakka-zIndex-popover, 1100);
+  max-width: 320px;
+  width: max-content;
+  background: var(--kakka-color-gray-0, #ffffff);
+  border: 1px solid var(--kakka-color-semantic-border-default, #e5e5e5);
+  border-radius: var(--kakka-borderRadius-lg, 8px);
+  padding: var(--kakka-spacing-4, 16px);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.10),
+    0 1px 4px rgba(0, 0, 0, 0.05);
+  font-family: var(--kakka-font-family-sans);
+  font-size: var(--kakka-font-size-sm, 14px);
+  color: var(--kakka-color-semantic-text-primary, #111);
+  line-height: var(--kakka-font-lineHeight-normal, 1.6);
+  /* 出現アニメーション */
+  animation: popoverEnter 0.12s ease forwards;
+}
+
+@keyframes popoverEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── 配置バリアント ──────────────────────────────────────────────────────────── */
+
+/* bottom（デフォルト） */
+.panel[data-placement='bottom'] {
+  top: calc(100% + var(--kakka-spacing-2, 8px));
+  left: 0;
+}
+
+/* top */
+.panel[data-placement='top'] {
+  bottom: calc(100% + var(--kakka-spacing-2, 8px));
+  left: 0;
+  animation-name: popoverEnterTop;
+}
+
+@keyframes popoverEnterTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* right */
+.panel[data-placement='right'] {
+  left: calc(100% + var(--kakka-spacing-2, 8px));
+  top: 0;
+  animation-name: popoverEnterRight;
+}
+
+@keyframes popoverEnterRight {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* left */
+.panel[data-placement='left'] {
+  right: calc(100% + var(--kakka-spacing-2, 8px));
+  top: 0;
+  animation-name: popoverEnterLeft;
+}
+
+@keyframes popoverEnterLeft {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,97 @@
+/* ─────────────────────────────────────────────
+   Stat（メトリクスカード）コンポーネント
+   ───────────────────────────────────────────── */
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kakka-spacing-1, 4px);
+  width: 100%;
+  padding: var(--kakka-spacing-5, 20px);
+  background: var(--kakka-color-semantic-background-default, #ffffff);
+  border: 1px solid var(--kakka-color-semantic-border-default, #e0e0db);
+  border-radius: var(--kakka-borderRadius-lg, 8px);
+  box-shadow: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.stat:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* ─── ヘッダ（ラベル + アイコン） ─── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kakka-spacing-2, 8px);
+}
+
+.label {
+  font-size: var(--kakka-font-size-xs, 12px);
+  font-weight: var(--kakka-font-weight-medium, 500);
+  letter-spacing: 0.04em;
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+  line-height: var(--kakka-font-lineHeight-tight, 1.25);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+}
+
+/* ─── メインの値 ─── */
+.value {
+  font-size: var(--kakka-font-size-3xl, 30px);
+  font-weight: var(--kakka-font-weight-bold, 700);
+  line-height: var(--kakka-font-lineHeight-tight, 1.25);
+  color: var(--kakka-color-semantic-text-primary, #1e1e19);
+  margin-top: var(--kakka-spacing-1, 4px);
+  /* 数値表示が多いので等幅フォントを使用 */
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── 変化量 ─── */
+.delta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kakka-spacing-1, 4px);
+  font-size: 13px;
+  font-weight: var(--kakka-font-weight-medium, 500);
+  line-height: var(--kakka-font-lineHeight-tight, 1.25);
+  margin-top: var(--kakka-spacing-1, 4px);
+}
+
+/* 増加: success 色 */
+.delta[data-direction='up'] {
+  color: var(--kakka-color-semantic-status-success, #4a6741);
+}
+
+/* 減少: error 色 */
+.delta[data-direction='down'] {
+  color: var(--kakka-color-semantic-status-error, #c0392b);
+}
+
+/* 変化なし: secondary */
+.delta[data-direction='neutral'] {
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+}
+
+.deltaArrow {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ─── 補足テキスト ─── */
+.helpText {
+  margin: var(--kakka-spacing-1, 4px) 0 0;
+  font-size: var(--kakka-font-size-xs, 12px);
+  color: var(--kakka-color-semantic-text-secondary, #525249);
+  line-height: var(--kakka-font-lineHeight-normal, 1.6);
+}
