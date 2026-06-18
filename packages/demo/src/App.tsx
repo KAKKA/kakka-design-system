@@ -9,12 +9,32 @@ import {
   Divider,
   Spinner,
   Accordion,
+  Stack,
+  Grid,
+  Field,
+  Tabs,
+  SegmentedControl,
+  Switch,
+  Alert,
+  Tooltip,
+  EmptyState,
+  Skeleton,
+  Pagination,
+  Table,
+  Stat,
+  Stepper,
+  DatePicker,
+  type TableColumn,
 } from '@kakka/react';
 import styles from './App.module.css';
+
+const STORYBOOK_URL = 'https://kakka.github.io/kakka-design-system/storybook/';
+const GITHUB_URL = 'https://github.com/KAKKA/kakka-design-system';
 
 const NAV_LINKS = [
   { label: '特徴', href: '#features' },
   { label: 'コンポーネント', href: '#components' },
+  { label: 'レシピ', href: '#recipes' },
   { label: 'プラットフォーム', href: '#platforms' },
 ];
 
@@ -26,6 +46,12 @@ const FEATURES = [
       '微かな温かみを持つグレースケールと、ウォームブラウン（#8B7355）のアクセントカラー。純黒ではない gray.900（#0A0A07）がシステム全体に温度感を与えます。',
   },
   {
+    icon: '▦',
+    title: '原子からレシピまで',
+    description:
+      'Button などの原子だけでなく、Stack/Grid/Container（レイアウト原子）、AppShell/PageHeader/Field（構造）、Table/Stepper/DatePicker（複雑系）、そして予約フロー等のレシピまでを提供。複雑な画面も崩れず組めます。',
+  },
+  {
     icon: '⬡',
     title: 'クロスプラットフォーム',
     description:
@@ -33,9 +59,9 @@ const FEATURES = [
   },
   {
     icon: '◎',
-    title: 'アクセシビリティ',
+    title: '洗練された設計思想',
     description:
-      'WCAG 2.2 AA 準拠を目指した設計。コントラスト比・フォーカス管理・ARIA 属性をすべてのコンポーネントで考慮しています。',
+      'Stripe / Notion 等を参考に「境界線より余白・色差」「影は浮遊要素のみ」「状態色は薄背景＋濃文字」「box-shadow フォーカスリング」を採用。WCAG 2.2 AA を志向。',
   },
 ];
 
@@ -45,9 +71,11 @@ const PLATFORMS = [
     icon: '⬡',
     description: 'React + TypeScript ライブラリ',
     badge: '@kakka/react',
-    snippet: `import { Button } from '@kakka/react';
+    snippet: `import { AppShell, PageHeader, Stat } from '@kakka/react';
 
-<Button variant="filled">KAKKA</Button>`,
+<AppShell sidebar={<Sidebar/>}>
+  <PageHeader title="ダッシュボード" />
+</AppShell>`,
   },
   {
     name: 'Android',
@@ -55,9 +83,9 @@ const PLATFORMS = [
     description: 'Jetpack Compose ライブラリ',
     badge: 'design.kakka:kakka-components',
     snippet: `KakkaTheme {
-    KakkaButton(
-        text = "KAKKA",
-        onClick = {}
+    KakkaStepper(
+        steps = listOf("日時", "情報", "確認"),
+        current = 1,
     )
 }`,
   },
@@ -67,21 +95,27 @@ const PLATFORMS = [
     description: 'SwiftUI ライブラリ',
     badge: 'KakkaComponents',
     snippet: `KakkaTheme {
-    KakkaButton("KAKKA") {}
+    KakkaAlert("予約が完了しました",
+               variant: .success)
 }`,
   },
 ];
 
 const FAQ_ITEMS = [
   {
-    title: 'どのプラットフォームで使えますか？',
+    title: 'どんなコンポーネントがありますか？',
     content:
-      'Web（React / TypeScript）、Android（Jetpack Compose）、iOS（SwiftUI）の3プラットフォームに対応しています。Style Dictionary によってデザイントークンが各プラットフォームに自動出力されます。',
+      '基本（Button/Input/Badge…）に加え、レイアウト原子（Stack/Grid/Container）、構造（Field/PageHeader/AppShell/Sidebar）、コントロール（Tabs/SegmentedControl/Switch）、フィードバック（Alert/Tooltip/Drawer/Menu…）、データ表示（Table/Stat/Pagination）、フロー/日付（Stepper/DatePicker）まで、40以上のコンポーネントを提供しています。',
   },
   {
-    title: 'デザイントークンとは何ですか？',
+    title: 'なぜ「レシピ」があるのですか？',
     content:
-      'カラー・スペーシング・タイポグラフィ・ボーダーラジウスなどのデザイン値を一元管理するための変数定義です。KAKKA では Style Dictionary v4 を使って JSON から CSS変数・TypeScript定数・Android XML・Swift enum を生成しています。',
+      '原子部品だけだと、複雑な画面の「組み立て方」が人やAIによってバラつき、UIが崩れがちです。KAKKA は予約フローやダッシュボードといった実例（レシピ）を用意し、余白・整列・密度の正解を示します。Storybook の Recipes/ で確認できます。',
+  },
+  {
+    title: 'どのプラットフォームで使えますか？',
+    content:
+      'Web（React / TypeScript）、Android（Jetpack Compose）、iOS（SwiftUI）の3プラットフォーム。Style Dictionary によってデザイントークンが各プラットフォームに自動出力されます。',
   },
   {
     title: 'ライセンスは？',
@@ -89,9 +123,142 @@ const FAQ_ITEMS = [
   },
 ];
 
+/* ─── データ表示デモ用 ─── */
+interface Reservation {
+  id: string;
+  customer: string;
+  date: string;
+  status: 'confirmed' | 'pending' | 'canceled';
+}
+
+const RESERVATIONS: Reservation[] = [
+  { id: '#10293', customer: '田中 花子', date: '6/20', status: 'confirmed' },
+  { id: '#10292', customer: '佐藤 太郎', date: '6/20', status: 'pending' },
+  { id: '#10291', customer: '鈴木 一郎', date: '6/19', status: 'confirmed' },
+  { id: '#10290', customer: '高橋 美咲', date: '6/19', status: 'canceled' },
+];
+
+const STATUS_MAP: Record<Reservation['status'], { label: string; variant: 'success' | 'warning' | 'error' }> = {
+  confirmed: { label: '確定', variant: 'success' },
+  pending: { label: '保留', variant: 'warning' },
+  canceled: { label: 'キャンセル', variant: 'error' },
+};
+
+const RESERVATION_COLUMNS: TableColumn<Reservation>[] = [
+  { key: 'id', header: '予約番号', monospace: true },
+  { key: 'customer', header: 'お客様' },
+  { key: 'date', header: '利用日', monospace: true },
+  {
+    key: 'status',
+    header: 'ステータス',
+    render: (r) => <Badge variant={STATUS_MAP[r.status].variant}>{STATUS_MAP[r.status].label}</Badge>,
+  },
+];
+
+const BOOKING_STEPS = [
+  { label: '日時を選択' },
+  { label: 'お客様情報' },
+  { label: '確認' },
+];
+
+const TIME_SLOTS = [
+  { value: 'am', label: '午前' },
+  { value: 'pm', label: '午後' },
+  { value: 'night', label: '夜間' },
+];
+
+/* ─── 予約フロー（レシピのインライン実演） ─── */
+function BookingDemo() {
+  const [step, setStep] = useState(0);
+  const [date, setDate] = useState<Date | null>(null);
+  const [slot, setSlot] = useState('am');
+  const [name, setName] = useState('');
+  const [done, setDone] = useState(false);
+  const canNext = step === 0 ? !!date : step === 1 ? !!name : true;
+
+  return (
+    <Card elevation={1} padding="lg">
+      <Stack gap={5}>
+        <Stepper steps={BOOKING_STEPS} current={done ? 3 : step} />
+        <Divider />
+
+        {done ? (
+          <Alert variant="success" title="予約が完了しました">
+            確認メールを送信しました。これがKAKKAのレシピで組んだ予約フローです。
+          </Alert>
+        ) : (
+          <div style={{ minHeight: 180 }}>
+            {step === 0 && (
+              <Stack gap={4}>
+                <Field label="利用日" required>
+                  <DatePicker value={date} onChange={setDate} placeholder="日付を選択" minDate={new Date()} fullWidth />
+                </Field>
+                <Field label="時間帯" required>
+                  <SegmentedControl options={TIME_SLOTS} value={slot} onValueChange={setSlot} />
+                </Field>
+              </Stack>
+            )}
+            {step === 1 && (
+              <Field label="お名前" required hint="予約確認に使用します">
+                <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="山田 太郎" fullWidth />
+              </Field>
+            )}
+            {step === 2 && (
+              <Stack gap={2}>
+                <SummaryRow label="利用日" value={date ? `${date.getMonth() + 1}/${date.getDate()}` : '-'} />
+                <SummaryRow label="時間帯" value={TIME_SLOTS.find((t) => t.value === slot)?.label ?? '-'} />
+                <SummaryRow label="お名前" value={name || '-'} />
+              </Stack>
+            )}
+          </div>
+        )}
+
+        {!done && (
+          <>
+            <Divider />
+            <Stack direction="row" justify="between">
+              <Button variant="ghost" disabled={step === 0} onClick={() => setStep((s) => s - 1)}>
+                戻る
+              </Button>
+              {step < 2 ? (
+                <Button variant="filled" disabled={!canNext} onClick={() => setStep((s) => s + 1)}>
+                  次へ
+                </Button>
+              ) : (
+                <Button variant="filled" onClick={() => setDone(true)}>
+                  予約を確定する
+                </Button>
+              )}
+            </Stack>
+          </>
+        )}
+      </Stack>
+    </Card>
+  );
+}
+
+function SummaryRow({ label, value }: { label: string; value: string }) {
+  return (
+    <Stack direction="row" justify="between" align="center">
+      <span style={{ color: 'var(--kakka-color-semantic-text-secondary, #525249)', fontSize: 14 }}>{label}</span>
+      <strong style={{ fontSize: 14 }}>{value}</strong>
+    </Stack>
+  );
+}
+
+const searchIcon = (
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M16.5 16.5L21 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [tab, setTab] = useState('all');
+  const [seg, setSeg] = useState('month');
+  const [notify, setNotify] = useState(true);
+  const [page, setPage] = useState(1);
 
   return (
     <div className={styles.app}>
@@ -109,11 +276,7 @@ export default function App() {
                 {l.label}
               </a>
             ))}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => window.open('https://github.com/KAKKA/kakka-design-system', '_blank')}
-            >
+            <Button variant="outline" size="sm" onClick={() => window.open(GITHUB_URL, '_blank')}>
               GitHub
             </Button>
           </nav>
@@ -136,7 +299,7 @@ export default function App() {
         <section className={styles.hero}>
           <div className={styles.container}>
             <div className={styles.heroEyebrow}>
-              <Badge variant="default">v0.1.0</Badge>
+              <Badge variant="default">v0.2.0</Badge>
               <span className={styles.heroEyebrowText}>Open Source Design System</span>
             </div>
 
@@ -147,24 +310,16 @@ export default function App() {
             </h1>
 
             <p className={styles.heroDesc}>
-              Android・iOS・Web（React）に統一したビジュアル言語を提供する
-              クロスプラットフォーム対応デザインシステム。
-              モノトーン×ウォームアクセントで、シンプルさの中にオリジナリティを。
+              原子部品からレイアウト・構造・複雑系・レシピまで。
+              複雑なサービスでも「出荷品質」で組み立てられる、
+              モノトーン×ウォームアクセントのクロスプラットフォーム対応デザインシステム。
             </p>
 
             <div className={styles.heroCta}>
-              <Button
-                variant="filled"
-                size="lg"
-                onClick={() => window.open('https://github.com/KAKKA/kakka-design-system', '_blank')}
-              >
+              <Button variant="filled" size="lg" onClick={() => window.open(GITHUB_URL, '_blank')}>
                 Get Started
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => window.open('https://kakka.github.io/kakka-design-system/storybook/', '_blank')}
-              >
+              <Button variant="outline" size="lg" onClick={() => window.open(STORYBOOK_URL, '_blank')}>
                 View Storybook
               </Button>
             </div>
@@ -201,7 +356,7 @@ export default function App() {
               </p>
             </div>
 
-            <div className={styles.featureGrid}>
+            <Grid minItemWidth={260} gap={4}>
               {FEATURES.map((f) => (
                 <Card key={f.title} elevation={1} padding="lg" className={styles.featureCard}>
                   <div className={styles.featureIcon}>{f.icon}</div>
@@ -209,7 +364,7 @@ export default function App() {
                   <p className={styles.featureDesc}>{f.description}</p>
                 </Card>
               ))}
-            </div>
+            </Grid>
           </div>
         </section>
 
@@ -220,9 +375,9 @@ export default function App() {
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
               <Badge variant="accent" size="sm">Components</Badge>
-              <h2 className={styles.sectionTitle}>18 のコンポーネント</h2>
+              <h2 className={styles.sectionTitle}>40+ のコンポーネント</h2>
               <p className={styles.sectionDesc}>
-                フォーム・データ表示・ナビゲーション・フィードバックまで網羅した実用的なセット。
+                原子からレイアウト・構造・複雑系まで。複雑な画面も一貫した余白・密度で組めます。
               </p>
             </div>
 
@@ -236,33 +391,119 @@ export default function App() {
                   <Button variant="ghost">Ghost</Button>
                   <Button variant="filled" loading>Loading</Button>
                   <Button variant="filled" disabled>Disabled</Button>
-                </div>
-                <div className={styles.showcaseRow}>
-                  <Button variant="filled" size="lg">Large</Button>
-                  <Button variant="filled" size="md">Medium</Button>
-                  <Button variant="filled" size="sm">Small</Button>
+                  <Tooltip content="これは Tooltip です">
+                    <Button variant="outline">Hover で Tooltip</Button>
+                  </Tooltip>
                 </div>
               </Card>
             </div>
 
-            {/* Badges & Tags */}
+            {/* Controls: Tabs / Segmented / Switch */}
             <div className={styles.showcaseBlock}>
-              <h3 className={styles.showcaseLabel}>バッジ・タグ</h3>
+              <h3 className={styles.showcaseLabel}>コントロール（Tabs / SegmentedControl / Switch）</h3>
               <Card elevation={0} padding="lg" className={styles.showcaseCard}>
-                <div className={styles.showcaseRow}>
-                  <Badge variant="default">Default</Badge>
-                  <Badge variant="accent">Accent</Badge>
-                  <Badge variant="success">Success</Badge>
-                  <Badge variant="warning">Warning</Badge>
-                  <Badge variant="error">Error</Badge>
-                </div>
-                <div className={styles.showcaseRow}>
-                  <Tag>React</Tag>
-                  <Tag variant="accent">Design System</Tag>
-                  <Tag>TypeScript</Tag>
-                  <Tag>Open Source</Tag>
-                </div>
+                <Stack gap={4}>
+                  <Tabs
+                    value={tab}
+                    onValueChange={setTab}
+                    tabs={[
+                      { value: 'all', label: 'すべて' },
+                      { value: 'active', label: '稼働中' },
+                      { value: 'archived', label: 'アーカイブ' },
+                    ]}
+                  />
+                  <div className={styles.showcaseRow}>
+                    <SegmentedControl
+                      value={seg}
+                      onValueChange={setSeg}
+                      options={[
+                        { value: 'day', label: '日' },
+                        { value: 'week', label: '週' },
+                        { value: 'month', label: '月' },
+                      ]}
+                    />
+                    <Switch checked={notify} onCheckedChange={setNotify} label="通知を受け取る" />
+                  </div>
+                </Stack>
               </Card>
+            </div>
+
+            {/* Feedback: Alert */}
+            <div className={styles.showcaseBlock}>
+              <h3 className={styles.showcaseLabel}>フィードバック（Alert）</h3>
+              <Stack gap={3}>
+                <Alert variant="info" title="お知らせ">新しいコンポーネントが追加されました。</Alert>
+                <Alert variant="success" title="成功">予約が確定しました。</Alert>
+                <Alert variant="warning" title="注意">利用時間の30分前です。</Alert>
+                <Alert variant="error" title="エラー">支払いに失敗しました。</Alert>
+              </Stack>
+            </div>
+
+            {/* Data: Stat + Table */}
+            <div className={styles.showcaseBlock}>
+              <h3 className={styles.showcaseLabel}>データ表示（Stat / Table）</h3>
+              <Stack gap={4}>
+                <Grid minItemWidth={180} gap={4}>
+                  <Stat label="本日の予約" value="18" delta="+12%" deltaDirection="up" />
+                  <Stat label="稼働率" value="86%" delta="+4pt" deltaDirection="up" />
+                  <Stat label="売上(今月)" value="¥1.28M" delta="-3%" deltaDirection="down" />
+                  <Stat label="キャンセル" value="5" delta="前週と同じ" deltaDirection="neutral" />
+                </Grid>
+                <Table
+                  columns={RESERVATION_COLUMNS}
+                  data={RESERVATIONS}
+                  getRowKey={(r) => r.id}
+                  hoverable
+                />
+                <Pagination
+                  page={page}
+                  totalPages={5}
+                  onPageChange={setPage}
+                  showCount
+                  totalItems={43}
+                  pageSize={10}
+                />
+              </Stack>
+            </div>
+
+            {/* Form */}
+            <div className={styles.showcaseBlock}>
+              <h3 className={styles.showcaseLabel}>フォーム（Field）</h3>
+              <Card elevation={0} padding="lg" className={styles.showcaseCard}>
+                <Grid minItemWidth={240} gap={4}>
+                  <Field label="お名前" required>
+                    <Input placeholder="田中 太郎" fullWidth />
+                  </Field>
+                  <Field label="メールアドレス" hint="ログインに使用します">
+                    <Input type="email" placeholder="hello@example.com" fullWidth />
+                  </Field>
+                </Grid>
+              </Card>
+            </div>
+
+            {/* Loading & Empty */}
+            <div className={styles.showcaseBlock}>
+              <h3 className={styles.showcaseLabel}>ローディング / 空状態（Skeleton / Spinner / EmptyState）</h3>
+              <Grid minItemWidth={260} gap={4}>
+                <Card elevation={0} padding="lg" className={styles.showcaseCard}>
+                  <Stack gap={2}>
+                    <Skeleton variant="text" width="60%" />
+                    <Skeleton variant="text" width="90%" />
+                    <Skeleton variant="text" width="75%" />
+                    <div style={{ marginTop: 8 }}>
+                      <Spinner size="md" label="読み込み中" />
+                    </div>
+                  </Stack>
+                </Card>
+                <Card elevation={0} padding="lg" className={styles.showcaseCard}>
+                  <EmptyState
+                    icon={searchIcon}
+                    title="予約が見つかりません"
+                    description="条件を変えて再検索してください。"
+                    action={<Button variant="outline" size="sm">条件をリセット</Button>}
+                  />
+                </Card>
+              </Grid>
             </div>
 
             {/* Avatars */}
@@ -274,71 +515,50 @@ export default function App() {
                   <Avatar name="山田 花子" size="lg" />
                   <Avatar name="佐藤 健" size="md" />
                   <Avatar name="鈴木" size="sm" />
-                  <div className={styles.avatarStack}>
-                    <Avatar name="A" size="md" />
-                    <Avatar name="B" size="md" />
-                    <Avatar name="C" size="md" />
-                    <span className={styles.avatarMore}>+8</span>
-                  </div>
                 </div>
               </Card>
             </div>
+          </div>
+        </section>
 
-            {/* Form */}
-            <div className={styles.showcaseBlock}>
-              <h3 className={styles.showcaseLabel}>フォーム</h3>
-              <Card elevation={0} padding="lg" className={styles.showcaseCard}>
-                <div className={styles.formDemo}>
-                  <Input
-                    label="お名前"
-                    placeholder="田中 太郎"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                  />
-                  <Input
-                    label="メールアドレス"
-                    type="email"
-                    placeholder="hello@example.com"
-                    hint="ログインに使用します"
-                  />
-                  <Input
-                    label="エラー例"
-                    placeholder="入力してください"
-                    error="このフィールドは必須です"
-                  />
-                </div>
-              </Card>
+        <Divider />
+
+        {/* ─── Recipes ─── */}
+        <section id="recipes" className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <Badge variant="accent" size="sm">Recipes</Badge>
+              <h2 className={styles.sectionTitle}>レシピ — 崩れない組み立ての手本</h2>
+              <p className={styles.sectionDesc}>
+                原子を「どう組むか」の正解を提示。下は実際に動く予約フローです（駐車場予約を想定）。
+              </p>
             </div>
 
-            {/* Spinner */}
-            <div className={styles.showcaseBlock}>
-              <h3 className={styles.showcaseLabel}>スピナー</h3>
-              <Card elevation={0} padding="lg" className={styles.showcaseCard}>
-                <div className={styles.showcaseRow}>
-                  <Spinner size="sm" label="読み込み中" />
-                  <Spinner size="md" label="読み込み中" />
-                  <Spinner size="lg" label="読み込み中" />
-                </div>
-              </Card>
-            </div>
-
-            {/* Stats Cards */}
-            <div className={styles.showcaseBlock}>
-              <h3 className={styles.showcaseLabel}>カード</h3>
-              <div className={styles.statsGrid}>
-                {[
-                  { label: 'コンポーネント', value: '18', badge: 'Web' },
-                  { label: 'トークン', value: '80+', badge: 'Design' },
-                  { label: 'プラットフォーム', value: '3', badge: 'Cross' },
-                ].map((s) => (
-                  <Card key={s.label} elevation={2} padding="lg" className={styles.statCard}>
-                    <Badge variant="default" size="sm">{s.badge}</Badge>
-                    <div className={styles.statValue}>{s.value}</div>
-                    <div className={styles.statLabel}>{s.label}</div>
-                  </Card>
-                ))}
+            <Grid minItemWidth={320} gap={6} align="start">
+              <div>
+                <h3 className={styles.showcaseLabel}>予約フロー（動作します）</h3>
+                <BookingDemo />
               </div>
-            </div>
+              <div>
+                <h3 className={styles.showcaseLabel}>もっと見る</h3>
+                <Card elevation={1} padding="lg">
+                  <Stack gap={4}>
+                    <p style={{ margin: 0, color: 'var(--kakka-color-semantic-text-secondary, #525249)', lineHeight: 1.7 }}>
+                      Storybook には予約フローのフル版に加え、AppShell + Sidebar + PageHeader + Stat + Table +
+                      Pagination で構成した<strong>ダッシュボード</strong>のレシピも収録しています。
+                    </p>
+                    <Stack direction="row" gap={2} wrap>
+                      <Button variant="filled" onClick={() => window.open(`${STORYBOOK_URL}?path=/story/recipes-予約フロー--駐車場予約`, '_blank')}>
+                        予約フロー（フル版）
+                      </Button>
+                      <Button variant="outline" onClick={() => window.open(`${STORYBOOK_URL}?path=/story/recipes-ダッシュボード--予約管理`, '_blank')}>
+                        ダッシュボード
+                      </Button>
+                    </Stack>
+                  </Stack>
+                </Card>
+              </div>
+            </Grid>
           </div>
         </section>
 
@@ -355,7 +575,7 @@ export default function App() {
               </p>
             </div>
 
-            <div className={styles.platformGrid}>
+            <Grid minItemWidth={280} gap={4}>
               {PLATFORMS.map((p) => (
                 <Card key={p.name} elevation={1} padding="lg" className={styles.platformCard}>
                   <div className={styles.platformHeader}>
@@ -369,7 +589,7 @@ export default function App() {
                   <pre className={styles.codeBlock}><code>{p.snippet}</code></pre>
                 </Card>
               ))}
-            </div>
+            </Grid>
           </div>
         </section>
 
@@ -400,18 +620,10 @@ export default function App() {
               <code>pnpm add @kakka/tokens @kakka/react</code>
             </div>
             <div className={styles.heroCta}>
-              <Button
-                variant="filled"
-                size="lg"
-                onClick={() => window.open('https://github.com/KAKKA/kakka-design-system', '_blank')}
-              >
+              <Button variant="filled" size="lg" onClick={() => window.open(GITHUB_URL, '_blank')}>
                 GitHub で見る
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => window.open('https://kakka.github.io/kakka-design-system/storybook/', '_blank')}
-              >
+              <Button variant="outline" size="lg" onClick={() => window.open(STORYBOOK_URL, '_blank')}>
                 Storybook を開く
               </Button>
             </div>
@@ -431,10 +643,10 @@ export default function App() {
               MIT License &nbsp;·&nbsp; Built with React + Style Dictionary
             </p>
             <div className={styles.footerLinks}>
-              <a href="https://github.com/KAKKA/kakka-design-system" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
                 GitHub
               </a>
-              <a href="https://kakka.github.io/kakka-design-system/storybook/" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
+              <a href={STORYBOOK_URL} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
                 Storybook
               </a>
             </div>
